@@ -1,5 +1,12 @@
 $(document).ready(function () {
   const amenities = {};
+  $.get('http://0.0.0.0:5001/api/v1/status/', (returnData) => {
+    // console.log(returnData);
+    if (returnData.status === 'OK') {
+      $('#api_status').attr('class', 'available')
+    }
+  });
+
   $('input:checkbox').click(function () {
     $(this).each(function () {
       if (this.checked) {
