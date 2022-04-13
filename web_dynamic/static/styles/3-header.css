@@ -10,13 +10,15 @@ header .logo {
     height: 100%;
 }
 #api_status {
-    margin-right: 30px;
+    margin-right: 38px;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     background-color: #CCCCCC;
     margin-top: auto;
     margin-bottom: auto;
+    float: right;
+    transform: translate(50%, 35%)
 }
 #api_status.available {
     background-color: #FF545F;
