@@ -64,6 +64,11 @@ button:hover {
     max-height: 300px;
 }
 
+.amenities:hover .popover,
+.locations:hover .popover {
+    visibility: visible;
+}
+
 .popover::-webkit-scrollbar{
     width: 0px;
 }
@@ -97,7 +102,3 @@ button:hover {
     margin-left: 0px;
 }
 
-.amenities:hover .popover,
-.locations:hover .popover {
-    visibility: visible;
-}
