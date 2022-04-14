@@ -8,7 +8,7 @@ The console is the first segment of the AirBnB project at Holberton School that 
 * Update attributes of an object
 * Destroy an object
 
-## Table of Content
+## Table of Contents
 * [Environment](#environment)
 * [Installation](#installation)
 * [File Descriptions](#file-descriptions)
@@ -21,30 +21,42 @@ The console is the first segment of the AirBnB project at Holberton School that 
 ## Environment
 This project is interpreted/tested on Ubuntu 14.04 LTS using python3 (version 3.4.3)
 
+Environment Variables:
+* HBNB_MYSQL_USER = database username
+* HBNB_MYSQL_PWD = password for aforementioned MySQL user
+* HBNB_MYSQL_HOST = the host of the database server, probably localhost
+* HBNB_MYSQL_DB = the name of the database
+* HBNB_TYPE_STORAGE = "db" for database, "file" for file storage (no quotes)
+* HBNB_API_PORT = the port number of the API server
+
 ## Installation
-* Clone this repository: `git clone "https://github.com/alexaorrico/AirBnB_clone.git"`
-* Access AirBnb directory: `cd AirBnB_clone`
-* Run hbnb(interactively): `./console` and enter command
-* Run hbnb(non-interactively): `echo "<command>" | ./console.py`
+* Clone this repository: `git clone git@github.com:Rock-Bautumn/AirBnB_clone_v4.git`
+* Access AirBnb directory: `cd AirBnB_clone_v4`
+* Run hbnb console (interactively): `./console` and enter command
+* Run hbnb console (non-interactively): `echo "<command>" | ./console.py`
+* Run web backend: `python3 -m web_dynamic.4-hbnb`
+* Run API server: `python3 -m api.v1.app`
+
 
 ## File Descriptions
 [console.py](console.py) - the console contains the entry point of the command interpreter. 
 List of commands this console current supports:
-* `EOF` - exits console 
-* `quit` - exits console
-* `<emptyline>` - overwrites default emptyline method and does nothing
-* `create` - Creates a new instance of`BaseModel`, saves it (to the JSON file) and prints the id
+* `EOF` - Exits the console
+* `help` - Prints available commands and provides information about commands.
+* `quit` - Exits the console
+* `<emptyline>` - Overwrites default emptyline method and does nothing.
+* `create` - Creates a new instance of`BaseModel`, saves it (to the JSON file) and prints the id.
 * `destroy` - Deletes an instance based on the class name and id (save the change into the JSON file). 
 * `show` - Prints the string representation of an instance based on the class name and id.
 * `all` - Prints all string representation of all instances based or not on the class name. 
 * `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). 
 
 #### `models/` directory contains classes used for this project:
-[base_model.py](/models/base_model.py) - The BaseModel class from which future classes will be derived
-* `def __init__(self, *args, **kwargs)` - Initialization of the base model
-* `def __str__(self)` - String representation of the BaseModel class
-* `def save(self)` - Updates the attribute `updated_at` with the current datetime
-* `def to_dict(self)` - returns a dictionary containing all keys/values of the instance
+[base_model.py](/models/base_model.py) - The BaseModel class from which future classes will be derived.
+* `def __init__(self, *args, **kwargs)` - Initialization of the base model.
+* `def __str__(self)` - String representation of the BaseModel class.
+* `def save(self)` - Updates the attribute `updated_at` with the current datetime.
+* `def to_dict(self)` - returns a dictionary containing all keys/values of the instance.
 
 Classes inherited from Base Model:
 * [amenity.py](/models/amenity.py)
@@ -54,7 +66,7 @@ Classes inherited from Base Model:
 * [state.py](/models/state.py)
 * [user.py](/models/user.py)
 
-#### `/models/engine` directory contains File Storage class that handles JASON serialization and deserialization :
+#### `/models/engine` directory contains File Storage class that handles JSON serialization and deserialization :
 [file_storage.py](/models/engine/file_storage.py) - serializes instances to a JSON file & deserializes back to instances
 * `def all(self)` - returns the dictionary __objects
 * `def new(self, obj)` - sets in __objects the obj with key <obj class name>.id
@@ -149,16 +161,45 @@ EOF  all  create  destroy  help  quit  show  update
 ** no instance found **
 (hbnb) quit
 ```
+```
 
+user@localmachine:AirBnB_clone_v4$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.4-hbnb
+ * Serving Flask app '4-hbnb' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://192.168.0.10:5000/ (Press CTRL+C to quit)
+192.168.0.10 - - [13/Apr/2022 19:45:43] "GET /4-hbnb HTTP/1.1" 200 -
+```
+
+```HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db HBNB_API_PORT=5001 python3 -m api.v1.app
+
+* Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://192.168.0.10:5001/ (Press CTRL+C to quit)
+127.0.0.1 - - [13/Apr/2022 16:03:36] "POST /api/v1/places_search HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2022 16:21:02] "GET /api/v1/status/ HTTP/1.1" 200 -
+
+```
 ## Bugs
-No known bugs at this time. 
+No known bugs at this time.
 
 ## Authors
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)  
 Jhoan Zamora - [Github](https://github.com/jzamora5) / [Twitter](https://twitter.com/JhoanZamora10)  
 David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave)
+Autumn Corona - [Github](https://github.com/Rock-Bautumn)
+B. Bwashi - [Github](https://github.com/darbumas)
 
-Second part of Airbnb: Joann Vuong
+Second part of Airbnb(?): Joann Vuong
 ## License
-Public Domain. No copy write protection. 
+Public Domain. No copyright protection.
