@@ -1,6 +1,5 @@
 function pluralize (string, num) {
-  if (num == 1) { return string }
-  else { return `${string}s`}
+  if (num === 1 || num === '1') { return string; } else { return `${string}s`; }
 }
 
 $(document).ready(function () {
@@ -8,10 +7,10 @@ $(document).ready(function () {
   $.get('http://0.0.0.0:5001/api/v1/status/', (returnData) => {
     // console.log(returnData);
     if (returnData.status === 'OK') {
-      $('#api_status').attr('class', 'available')
+      $('#api_status').attr('class', 'available');
     }
   });
-  console.log("before");
+  console.log('before');
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search',
     type: 'POST',
@@ -19,12 +18,12 @@ $(document).ready(function () {
     dataType: 'json',
     contentType: 'application/json',
     success: function (data) {
-        console.log(data)
-        let i = ""
-        for (let i in data) {
-            let place = data[i];
-            console.log(`place is ${place.name}`)
-            $('section.places').append(
+      console.log(data);
+      // const i = '';
+      for (const i in data) {
+        const place = data[i];
+        // console.log(`place is ${place.name}`)
+        $('section.places').append(
               `
               <article>
               <div class="title_box">
@@ -43,11 +42,11 @@ $(document).ready(function () {
                     </div>
             </article>
               `
-            )
-            console.log (place.name)
-          }
+        );
+        console.log(place.name);
+      }
     }
-  })
+  });
   // let sendingData = {};
   // sendingData.name = "Raj";
   // sendingData.age  = 32;
@@ -58,7 +57,7 @@ $(document).ready(function () {
   // $.post('http://0.0.0.0:5001/api/v1/places_search/', sendingData, function(recvdData) {
   //   console.log(recvdData);
   // });
-  console.log("okay");
+  console.log('okay');
 
   $('input:checkbox').click(function () {
     $(this).each(function () {
@@ -68,8 +67,8 @@ $(document).ready(function () {
         delete amenities[$(this).data('id')];
       }
     });
-    if (sendingDataect.values(amenities).length > 0) {
-      $('.amenities h4').text(sendingDataect.values(amenities).join(', '));
+    if (Object.values(amenities).length > 0) {
+      $('.amenities h4').text(Object.values(amenities).join(', '));
     } else {
       $('.amenities h4').html('&nbsp');
     }

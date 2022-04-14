@@ -1,11 +1,10 @@
 function pluralize (string, num) {
-  if (num == 1) { return string }
-  else { return `${string}s`}
+  if (num === 1 || num === '1') { return string; } else { return `${string}s`; }
 }
 
 function doQuery (amenitiesList) {
   // console.log(JSON.stringify(amenitiesList))
-  amenitiesList = JSON.stringify({'amenities': amenitiesList})
+  amenitiesList = JSON.stringify({ amenities: amenitiesList });
   // console.log(amenitiesList)
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search',
@@ -14,13 +13,13 @@ function doQuery (amenitiesList) {
     dataType: 'json',
     contentType: 'application/json',
     success: function (data) {
-        // console.log(data)
-        $('section.places').empty();
-        let i = ""
-        for (let i in data) {
-            let place = data[i];
-            // console.log(`place is ${place.name}`)
-            $('section.places').append(
+      // console.log(data)
+      $('section.places').empty();
+      // const i = '';
+      for (const i in data) {
+        const place = data[i];
+        // console.log(`place is ${place.name}`)
+        $('section.places').append(
               `
               <article>
               <div class="title_box">
@@ -39,11 +38,11 @@ function doQuery (amenitiesList) {
                     </div>
             </article>
               `
-            )
-            // console.log (place.name)
-          }
+        );
+        // console.log (place.name)
+      }
     }
-  })
+  });
 }
 
 $(document).ready(function () {
@@ -51,7 +50,7 @@ $(document).ready(function () {
   $.get('http://0.0.0.0:5001/api/v1/status/', (returnData) => {
     // console.log(returnData);
     if (returnData.status === 'OK') {
-      $('#api_status').attr('class', 'available')
+      $('#api_status').attr('class', 'available');
     }
   });
   doQuery([]);
@@ -73,19 +72,17 @@ $(document).ready(function () {
 
   $('.filters > button').click(function () {
     // console.log('clicked it!!')
-    let outList = [];
+    const outList = [];
     $('.amenities input:checkbox').each(function () {
       // console.log('here?')
       if (this.checked) {
         // console.log(`data id: ${$(this).attr('data-id')}`)
         outList.push($(this).attr('data-id'));
-      }
-      else {
+      } else {
         // console.log(`missed: ${this.checked}`)
       }
-      
     });
     // console.log(outList);
-    doQuery(outList)
+    doQuery(outList);
   });
 });
